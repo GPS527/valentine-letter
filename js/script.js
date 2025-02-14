@@ -3,62 +3,82 @@ function uploadMemory() {
     const files = fileInput.files;
     const container = document.getElementById('polaroidsContainer');
 
-    for (let i = 0; i < files.length; i++) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const polaroid = document.createElement('div');
-            polaroid.className = 'polaroid';
-            polaroid.innerHTML = `
-                <button type="button" onclick="deleteMemory(this)">×</button>
-                <img src="${event.target.result}" alt="Memory">
-            `;
-            container.appendChild(polaroid);
-        };
-        reader.readAsDataURL(files[i]);
+    if (files.length === 0) {
+        alert('Please select at least one image.');
+        return;
     }
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const polaroid = document.createElement('div');
+                polaroid.className = 'polaroid';
+                polaroid.innerHTML = `
+                    <button type="button" onclick="deleteMemory(this)">×</button>
+                    <img src="${event.target.result}" alt="Memory">
+                `;
+                container.appendChild(polaroid);
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please select only image files.');
+        }
+    }
+
+    // Clear the file input so the same file can be uploaded again if needed
+    fileInput.value = '';
 }
 
 function deleteMemory(button) {
     const polaroid = button.parentElement;
-    polaroid.classList.add('fadeOut');
-    setTimeout(() => {
-        polaroid.remove();
-    }, 500); // Matches animation duration
+    polaroid.remove();
 }
 
 function sendLetter() {
     alert('Your Valentine letter has been sent!');
 }
 
-function createFloatingHearts() {
+function createFloatingItems() {
     const heartContainer = document.getElementById('floatingHearts');
+    const images = [
+        'images/heart.png',
+        'images/cupid.png',
+        'images/rose.png',
+        // Add paths to your images
+    ];
 
     setInterval(() => {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
+        const item = document.createElement('div');
+        item.className = 'floating-item';
 
-        // Randomize size, position, and animation duration
-        const size = Math.random() * 20 + 10; // Size between 10px and 30px
-        heart.style.width = `${size}px`;
-        heart.style.height = `${size}px`;
+        // Randomize image
+        const imgIndex = Math.floor(Math.random() * images.length);
+        item.style.backgroundImage = `url('${images[imgIndex]}')`;
 
-        heart.style.left = Math.random() * 100 + 'vw';
+        // Randomize size
+        const size = Math.random() * 20 + 40; // Size between 40px and 60px
+        item.style.width = `${size}px`;
+        item.style.height = `${size}px`;
 
-        const animationDuration = Math.random() * 5 + 5; // Duration between 5s and 10s
-        heart.style.animationDuration = `${animationDuration}s`;
+        // Randomize position
+        item.style.left = Math.random() * 100 + 'vw';
 
-        // Randomize heart color
-        const colors = ['#ff6b81', '#ff4757', '#ff7f50', '#ff6348', '#ff1493'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        heart.style.backgroundColor = color;
+        // Randomize animation duration
+        const duration = Math.random() * 5 + 5; // Duration between 5s and 10s
+        item.style.animationDuration = `${duration}s`;
 
-        heartContainer.appendChild(heart);
+        heartContainer.appendChild(item);
 
-        // Remove heart after animation is complete
+        // Remove item after animation is complete
         setTimeout(() => {
-            heart.remove();
-        }, animationDuration * 1000);
-    }, 500); // Create a new heart every 0.5 seconds
+            item.remove();
+        }, duration * 1000);
+    }, 800);
 }
 
-createFloatingHearts();
+createFloatingItems();
