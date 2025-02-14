@@ -5,6 +5,8 @@ body {
     text-align: center;
     animation: fadeIn 2s;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 @keyframes fadeIn {
@@ -13,7 +15,8 @@ body {
 }
 
 .container {
-    width: 60%;
+    width: 90%;
+    max-width: 600px;
     margin: auto;
     padding: 20px;
     background-color: #ffffff;
@@ -50,7 +53,7 @@ textarea {
 }
 
 .polaroid {
-    width: 120px;
+    width: calc(50% - 20px); /* Adjusted for mobile */
     margin: 10px;
     padding: 10px;
     background-color: #ffffff;
@@ -124,4 +127,20 @@ button:hover {
     0% { transform: translateY(0) rotate(45deg); opacity: 0.8; }
     50% { opacity: 0.4; }
     100% { transform: translateY(-1000px) rotate(45deg); opacity: 0; }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+
+    .polaroid {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    textarea {
+        height: 150px;
+    }
 }
