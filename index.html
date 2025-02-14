@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To My Nakhro</title>
+    <!-- Include Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Link to CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -11,13 +14,14 @@
         <h1>To My Nakhro</h1>
         <form id="valentineForm">
             <textarea id="valentineLetter" placeholder="Write your letter here..."></textarea>
-            <input type="file" id="uploadMemory" accept="image/*">
+            <input type="file" id="uploadMemory" accept="image/*" multiple>
             <button type="button" onclick="uploadMemory()">Upload Memory</button>
             <div id="polaroidsContainer"></div>
             <button type="button" onclick="sendLetter()">Send Letter</button>
         </form>
     </div>
     <div id="floatingHearts"></div>
+    <!-- Include JavaScript -->
     <script src="js/script.js"></script>
 </body>
 </html>
