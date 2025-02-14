@@ -9,8 +9,8 @@ function uploadMemory() {
             const polaroid = document.createElement('div');
             polaroid.className = 'polaroid';
             polaroid.innerHTML = `
+                <button type="button" onclick="deleteMemory(this)">×</button>
                 <img src="${event.target.result}" alt="Memory">
-                <button type="button" onclick="deleteMemory(this)">Delete</button>
             `;
             container.appendChild(polaroid);
         };
@@ -23,35 +23,42 @@ function deleteMemory(button) {
     polaroid.classList.add('fadeOut');
     setTimeout(() => {
         polaroid.remove();
-    }, 1000); // Matches animation duration
+    }, 500); // Matches animation duration
 }
 
 function sendLetter() {
-    const letterContent = document.getElementById('valentineLetter').value;
-    const polaroids = document.getElementById('polaroidsContainer').innerHTML;
-    const letterData = {
-        letter: letterContent,
-        memories: polaroids
-    };
-
-    // Use GitHub API to upload the letter and memories (simplified example)
-    console.log('Sending letter:', letterData);
-
     alert('Your Valentine letter has been sent!');
 }
 
-// Add floating hearts
 function createFloatingHearts() {
     const heartContainer = document.getElementById('floatingHearts');
 
     setInterval(() => {
         const heart = document.createElement('div');
         heart.className = 'heart';
-        heart.style.left = `${Math.random() * 100}%`;
-        heart.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random duration between 3s and 6s
+
+        // Randomize size, position, and animation duration
+        const size = Math.random() * 20 + 10; // Size between 10px and 30px
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size}px`;
+
+        heart.style.left = Math.random() * 100 + 'vw';
+
+        const animationDuration = Math.random() * 5 + 5; // Duration between 5s and 10s
+        heart.style.animationDuration = `${animationDuration}s`;
+
+        // Randomize heart color
+        const colors = ['#ff6b81', '#ff4757', '#ff7f50', '#ff6348', '#ff1493'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        heart.style.backgroundColor = color;
+
         heartContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000); // Match the duration of the animation
-    }, 500); // Create a new heart every 0.5s
+
+        // Remove heart after animation is complete
+        setTimeout(() => {
+            heart.remove();
+        }, animationDuration * 1000);
+    }, 500); // Create a new heart every 0.5 seconds
 }
 
 createFloatingHearts();
