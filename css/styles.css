@@ -1,5 +1,5 @@
 body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Comic Neue', cursive, sans-serif; /* Updated font for better aesthetics */
     background-color: #fff0f5;
     color: #333;
     text-align: center;
@@ -32,11 +32,12 @@ body {
 
 textarea {
     width: 100%;
-    height: 100px;
+    height: 150px; /* Increased height for better aesthetics */
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
+    font-family: 'Comic Neue', cursive, sans-serif; /* Ensuring consistent font */
     animation: fadeIn 2s;
 }
 
